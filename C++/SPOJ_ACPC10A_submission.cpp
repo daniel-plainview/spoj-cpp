@@ -1,6 +1,3 @@
-//track these changes
-//Lets see how github sees these
-//Heylo
 #include<iostream>
 using namespace std;
 int main()
@@ -28,4 +25,3 @@ int main()
   }
   return 0;
 }
-//The difference
