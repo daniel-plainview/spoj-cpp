@@ -2,7 +2,7 @@
 #include<bits/stdc++.h>
 #include<vector>
 using namespace std;
- int first4pow(int base, int index )
+int first4pow(int base, int index )
 {
   vector <int> repowers(5);
   repowers[0]=1;
@@ -25,7 +25,14 @@ using namespace std;
   }
   else
   {
-    return 0;
+    if(index)
+    {
+      return 0;
+    }
+    else
+    {
+      return 1;
+    }
   }
 }
 
