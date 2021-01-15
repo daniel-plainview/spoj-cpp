@@ -2,40 +2,42 @@
 #include<bits/stdc++.h>
 #include<vector>
 using namespace std;
-vector <int> first4pow(int base)
+ int first4pow(int base, int index )
 {
-vector <int> repowers(4,0);
-if( base % 10  )
+  vector <int> repowers(5);
+  repowers[0]=1;
+  int base_units=base % 10, multi = 1  ;
+  for(int i=1;i<=4;i++)
   {
-    int base_units=base % 10 ,multi ;
-    for(int i=0;i<repowers.size();i++)
+    multi = base_units * repowers [i-1];
+    repowers[i] = multi % 10;
+  }
+  if(base%10)
+  {
+    if(index%4)
     {
-      if(i != 0)
-      {
-        multi = base_units * repowers [i-1];
-        repowers[i] = multi % 10;
-      }
-      else
-      {
-        repowers[i] = 1;
-      }
+      return repowers[index % 4];
     }
-    return repowers;
+    else
+    {
+      return repowers[4];
+    }
   }
   else
   {
-    return repowers;
+    return 0;
   }
 }
 
 int main()
 {
-  vector <int> output(4,0);
-  int input;
-  cout<<endl<<"Enter the input : ";
-  cin>>input;
-  output=first4pow(input);
-  for(int i=0;i<output.size();i++)
-  cout<<output[i]<<endl;
+  int base,expo,trial,output;
+  cin>>trial;
+  while(trial--)
+  {
+    cin>>base>>expo;
+    output=first4pow(base,expo);
+    cout<<output<<endl;
+  }
   return 0;
 }
