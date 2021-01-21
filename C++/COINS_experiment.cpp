@@ -1,4 +1,3 @@
-/* Bytelandian Coins */
 #include<iostream>
 #include<bits/stdc++.h>
 #include<vector>
