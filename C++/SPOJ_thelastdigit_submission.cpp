@@ -1,6 +1,5 @@
 #include<iostream>
 #include<bits/stdc++.h>
-#include<vector>
 using namespace std;
 int unitsdigit(int base,int exp)
 {
@@ -10,7 +9,10 @@ int unitsdigit(int base,int exp)
   }
   else if(exp==1)
   {
-    return base%10;
+    if(base%10)
+      return base%10;
+    else
+      return 0;
   }
   else if(base%10)
   {
@@ -30,9 +32,8 @@ int main()
   cin>>trials;
   while(trials--)
   {
-    cout<<endl<<"Enter the base and exponent ";
     cin>>base>>exponent;
-    cout<<unitsdigit(base,exponent);
+    cout<<endl<<unitsdigit(base,exponent);
   }
   return 0;
 }
