@@ -1,33 +1,37 @@
 #include<iostream>
 #include<vector>
-int primefactors(int a)
+#include<bits/stdc++.h>
+using namespace std;
+void primesbefore(int a)
 {
-  int count=0;
-  for(int i=2;i*i<=2;i++)
+  bool prime[a+1];
+  memset(prime,true,sizeof(prime));
+  for(int i=2; i*i<=a ;i++)
   {
-    if(a%i)
+
+    if(prime[i]==true)
     {
-      count+=0;
-    }
-    else
-    { int f2=a/i;
-      if(f2==i)
-      {
-        count+=1;
-      }
-      else
-      {
-        count+=2;
-      }
+        /*falsify the multiples*/
+        for(int j=i*i;j<=a;j+=i)
+        {
+          prime[j]=false;
+        }
     }
   }
-  return count;
+  for(int i=0;i<=a;i++)
+  {
+    if(prime[i])
+    {
+      cout<<endl<<i;
+    }
+  }
 }
+
 int main()
 {
   int input;
-  cout<<endl<<"Enter the number of squares : ";
+  cout<<endl<<"Count the primes upto : ";
   cin>>input;
-  cout<<endl<<primefactors(input*input);
+  primesbefore(input);
   return 0;
 }
