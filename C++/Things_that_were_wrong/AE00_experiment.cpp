@@ -1,24 +1,19 @@
 #include<iostream>
-#include<vector>
 using namespace std;
 int count_factors(int a)
 {
-  int count=0;
-  for(int i=1;i*i<=a;i++)
+  int numrec=0;
+  for(int j=1;j<=a;j++)
   {
-    if(a%i==0)
+    int count=0;
+    for(int i=1;i*i<=j;i++)
     {
-      if(i*i==a)
-      {
-        count+=0;
-      }
-      else
-      {
-        count+=2;
-      }
+      if(j%i==0)
+      count++;
     }
+    numrec+=count;
   }
-return count;
+return numrec;
 }
 
 int main()
