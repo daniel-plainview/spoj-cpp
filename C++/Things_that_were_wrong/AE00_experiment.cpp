@@ -3,37 +3,24 @@
 using namespace std;
 int count_factors(int a)
 {
-  vector <int> lista;
-  vector <int> listb;
-  if(a==1)
+  int count=0;
+  for(int i=1;i*i<=a;i++)
   {
-    return 0;
-  }
-  else
+    if(a%i==0)
     {
-    for(int i=1;i*i<=a;i++)
-    {
-      if(a%i==0)
+      if(i*i==a)
       {
-        lista.push_back(i);
-        listb.push_back(a/i);
-      }
-    }
-    int count=0;
-    for(int i=0;i<lista.size();i++)
-    {
-      if(lista[i]==listb[i])
-      {
-        count+=1;
+        count+=0;
       }
       else
       {
         count+=2;
       }
     }
-    return count;
   }
+return count;
 }
+
 int main()
 {
   int input;
