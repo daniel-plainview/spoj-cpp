@@ -1,37 +1,43 @@
 #include<iostream>
 #include<vector>
-#include<bits/stdc++.h>
 using namespace std;
-void primesbefore(int a)
+int count_factors(int a)
 {
-  bool prime[a+1];
-  memset(prime,true,sizeof(prime));
-  for(int i=2; i*i<=a ;i++)
+  vector <int> lista;
+  vector <int> listb;
+  if(a==1)
   {
-
-    if(prime[i]==true)
-    {
-        /*falsify the multiples*/
-        for(int j=i*i;j<=a;j+=i)
-        {
-          prime[j]=false;
-        }
-    }
+    return 0;
   }
-  for(int i=0;i<=a;i++)
-  {
-    if(prime[i])
+  else
     {
-      cout<<endl<<i;
+    for(int i=1;i*i<=a;i++)
+    {
+      if(a%i==0)
+      {
+        lista.push_back(i);
+        listb.push_back(a/i);
+      }
     }
+    int count=0;
+    for(int i=0;i<lista.size();i++)
+    {
+      if(lista[i]==listb[i])
+      {
+        count+=1;
+      }
+      else
+      {
+        count+=2;
+      }
+    }
+    return count;
   }
 }
-
 int main()
 {
   int input;
-  cout<<endl<<"Count the primes upto : ";
   cin>>input;
-  primesbefore(input);
+  cout<<endl<<count_factors(input*input);
   return 0;
 }
