@@ -1,60 +1,54 @@
 //Works only when the array is already sorted
 #include<iostream>
 #include<vector>
+#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
-int Binsearch(vector <int> a,int n, int key)
+int largestdist(vector <int> poslist ,int n ,int ncows)
 {
-  int low=0,high=n-1,mid;
+  sort(poslist.begin(),poslist.end());
+  int low=poslist.front() , high=poslist.back(),best;
   while(low<=high)
   {
-      mid=(low+high)/2;
-      if(key==a[mid])
+    int gap=(low+high)/2,cow = 1,left=0;
+    for(int i=1; i<=n && cow<ncows;i++)
+    {
+      if(poslist[left]-poslist[i] >= gap)
       {
-        return mid;
+        cow++;
+        left=i;
       }
-      else
-      {
-        if(key<a[mid])
-        {
-          high=mid-1;
-        }
-        else if(key>a[mid])
-        {
-          low=mid+1;
-        }
-      }
+    }
+    if(cow < ncows)
+    {
+      high=gap-1;
+    }
+    else
+    {
+      low=gap+1;
+    }
+    best = gap;
   }
-  if(low>high)
-  {
-    return -1;
-  }
+  return best;
 }
 int main()
 {
-  vector <int> input;
-  int length,key,in,output;
-  cout<<endl<<"Enter the digits in ascending order(only postive integers) : "<<endl;
-  cin>>in;
-  while(in != -1)
+  int trials;
+  cout<<"Enter the number of trials : ";
+  cin>>trials;
+  while(trials--)
   {
-    input.push_back(in);
-    cin>>in;
+    int nstalls,c,input,largest_dist;
+    cout<<"Enter the number of stalls and cows : ";
+    cin>>nstalls>>c;
+    vector <int> stalls(nstalls);
+    for(int i=0;i<nstalls;i++)
+    {
+      cout<<"Enter the stall number : ";
+      cin>>input;
+      stalls.push_back(input);
+    }
+    largest_dist=largestdist(stalls,nstalls,c);
+    cout<<"The distance max dist is : "<<largest_dist;
   }
-  for(int i=0;i<input.size();i++)
-  {
-    cout<<input[i]<<" ";
-  }
-  cout<<"Enter the search term : ";
-  cin>>key;
-  output=Binsearch(input,input.size(),key);
-  if(output != -1)
-  {
-    cout<<endl<<"The number was found at "<<output;
-  }
-  else
-  {
-    cout<<endl<<"The number was not found";
-  }
-
-  return 0;
 }
