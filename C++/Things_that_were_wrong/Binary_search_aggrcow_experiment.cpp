@@ -7,30 +7,30 @@ using namespace std;
 int largestdist(vector <int> poslist ,int n ,int ncows)
 {
   sort(poslist.begin(),poslist.end());
-  int low=poslist.front() , high=poslist.back(),best;
+  int low=poslist.front(),high=poslist.back(),gap=(low+high)/2;
+  int cow=1,left=0,i=1;
   while(low<=high)
   {
-    int gap=(low+high)/2,cow = 1,left=0;
-    for(int i=1; i<=n && cow<ncows;i++)
+    for(;i<=n && cow<=ncows; i++)
     {
-      if(poslist[left]-poslist[i] >= gap)
+      if(poslist[i]-poslist[left] >= gap)
       {
+        int temp;
         cow++;
-        left=i;
+        temp=i;
+        i=left+1;
+        left=temp;
+        if(poslist[i] + gap > poslist.back())
+        {
+          high=gap;
+        }
       }
     }
-    if(cow < ncows)
-    {
-      high=gap-1;
-    }
-    else
-    {
-      low=gap+1;
-    }
-    best = gap;
+    gap=low+high/2;
   }
-  return best;
+  return i;
 }
+
 int main()
 {
   int trials;
