@@ -7,48 +7,51 @@ using namespace std;
 int largestdist(vector <int> poslist ,int n ,int ncows)
 {
   sort(poslist.begin(),poslist.end());
-  int low=poslist.front(),high=poslist.back(),gap=(low+high)/2;
-  int cow=1,left=0,i=1;
+  int low=poslist[0],high=poslist[n-1],cow=1,left=0,best=0,gap;
   while(low<=high)
   {
-    for(;i<=n && cow<=ncows; i++)
+    gap=(low+high-1)/2;
+    for(int i=1;i<=n && cow<ncows;i++)
     {
       if(poslist[i]-poslist[left] >= gap)
       {
-        int temp;
         cow++;
-        temp=i;
-        i=left+1;
-        left=temp;
-        if(poslist[i] + gap > poslist.back())
-        {
-          high=gap;
-        }
+        left=i;
       }
     }
-    gap=low+high/2;
+    if(cow>=ncows)
+    {
+        best=cow;
+        low = gap+1;
+
+    }
+    else
+    {
+        high = gap-1;
+    }
   }
-  return i;
+  return best;
 }
 
 int main()
 {
   int trials;
-  cout<<"Enter the number of trials : ";
   cin>>trials;
+  cout<<endl;
   while(trials--)
   {
     int nstalls,c,input,largest_dist;
-    cout<<"Enter the number of stalls and cows : ";
-    cin>>nstalls>>c;
     vector <int> stalls(nstalls);
+    cin>>nstalls>>c;
+    cout<<endl;
     for(int i=0;i<nstalls;i++)
     {
-      cout<<"Enter the stall number : ";
       cin>>input;
       stalls.push_back(input);
+      cout<<endl;
     }
     largest_dist=largestdist(stalls,nstalls,c);
-    cout<<"The distance max dist is : "<<largest_dist;
+    cout<<endl<<largest_dist;
   }
+  return 0;
 }
