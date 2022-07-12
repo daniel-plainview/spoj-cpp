@@ -1,6 +1,8 @@
-
 .idea/.gitignore
 .idea/misc.xml
 .idea/modules.xml
 .idea/spoj-java.iml
 .idea/vcs.xml
+java/java.iml
+java/src/AggrCow.java
+java/src/AggrCowTest.java
