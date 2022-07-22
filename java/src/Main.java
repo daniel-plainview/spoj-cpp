@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class AggrCow {
+public class Main {
     public int n, c;
     public ArrayList<Integer> positions;
     private int[] orderedPositions;
     private int outVal;
 
-    public AggrCow(int n, int c, ArrayList<Integer> positions) {
+    public Main(int n, int c, ArrayList<Integer> positions) {
         this.n = n;
         this.c = c;
         this.positions = positions;
@@ -18,16 +18,18 @@ public class AggrCow {
         setOrderedPositions(pos);
         int low = pos[1] - pos[0];
         int high = pos[pos.length - 1] - pos[0];
+        int mid = 0;
         while (low <= high) {
-            int mid = (high + low) / 2;
-            outVal = mid;
+            mid = (high + low) / 2;
             //if cows can be placed at a distance of mid
+//            System.out.println(mid + " " + canPlace(mid));
             if (canPlace(mid)) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
+        outVal = mid;
 
     }
 
@@ -49,23 +51,28 @@ public class AggrCow {
 
     public static void main(String[] args) {
         int t, n, c;
-        ArrayList<Integer> inputPositions = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         t = input.nextInt();
         while (t-- > 0) {
             n = input.nextInt();
-            int tNum = n;
+            int nNum = n;
             c = input.nextInt();
-            while (tNum-- > 0) {
+            ArrayList<Integer> inputPositions = new ArrayList<>();
+            boolean inNotValid = false;
+            while (nNum-- > 0) {
                 int inputPosition = input.nextInt();
+                if (inputPosition < 0 || c < 2 || c > n) {
+                    System.out.println(0);
+                    inNotValid = true;
+                    break;
+                }
                 inputPositions.add(inputPosition);
-                n--;
             }
-            AggrCow aggrCow = new AggrCow(n, c, inputPositions);
-            System.out.println(aggrCow.outVal);
-
-
-
+//            System.out.println("positions : " + inputPositions);
+            if (!inNotValid) {
+                Main aggrCow = new Main(n, c, inputPositions);
+                System.out.println(aggrCow.outVal);
+            }
         }
     }
 
