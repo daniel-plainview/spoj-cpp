@@ -16,7 +16,8 @@ public class Main {
         int[] pos = positions.stream().mapToInt(i -> i).toArray();
         Arrays.sort(pos);
         setOrderedPositions(pos);
-        int low = pos[1] - pos[0];
+//        int low = pos[1] - pos[0];
+        int low = 0;
         int high = pos[pos.length - 1] - pos[0];
         int mid = 0;
         while (low <= high) {
